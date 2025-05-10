@@ -1,10 +1,8 @@
 import {
   system,
-  CustomCommandParamType,
-  CommandPermissionLevel,
   CustomCommandOrigin,
   CustomCommandResult,
-  CustomCommandStatus,
+  CustomCommand,
 } from "@minecraft/server";
 
 type CommandEnum = {
@@ -16,24 +14,11 @@ class CommandRegistry {
   private registry = system.beforeEvents.startup;
 
   registerCommand(
-    name: string,
-    description: string,
-    mandatoryParameters: any[],
-    optionalParameters: any[],
-    permissionLevel: CommandPermissionLevel,
+    customCommand: CustomCommand,
     callback: (origin: CustomCommandOrigin, ...args: any[]) => CustomCommandResult | undefined
   ): void {
     this.registry.subscribe((ev) => {
-      ev.customCommandRegistry.registerCommand(
-        {
-          name,
-          description,
-          mandatoryParameters,
-          optionalParameters,
-          permissionLevel,
-        },
-        callback
-      );
+      ev.customCommandRegistry.registerCommand(customCommand, callback);
     });
   }
 
