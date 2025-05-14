@@ -1,7 +1,11 @@
 import {
   system,
+  CustomCommandParamType,
+  CommandPermissionLevel,
   CustomCommandOrigin,
   CustomCommandResult,
+  CustomCommandStatus,
+  CustomCommandParameter,
   CustomCommand,
 } from "@minecraft/server";
 
